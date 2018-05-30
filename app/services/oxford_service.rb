@@ -5,9 +5,7 @@ class OxfordService
 
   def self.make_request(endpoint)
     request = build_request(endpoint)
-    response = request.get do |req|
-      build_headers(req)
-    end
+    response = request.get
 
     return { success: false } if response.status != 200
 
@@ -25,12 +23,15 @@ class OxfordService
   def self.build_request(endpoint)
     url = "#{BASE_URL}#{endpoint}"
 
-    Faraday.new(url: url)
+    conn = Faraday.new(url: url)
+    build_headers(conn)
+
+    conn
   end
 
-  def self.build_headers(req)
-    req.headers['app_id'] = ENV['OXFORD_APP_ID']
-    req.headers['app_key'] = ENV['OXFORD_API_KEY']
+  def self.build_headers(conn)
+    conn.headers['app_id'] = ENV['OXFORD_APP_ID']
+    conn.headers['app_key'] = ENV['OXFORD_API_KEY']
   end
 
   def self.root_form(data)
