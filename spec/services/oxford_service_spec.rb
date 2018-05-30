@@ -5,7 +5,7 @@ describe OxfordService, type: :service do
     VCR.use_cassette('oxford_api_generic') do
       word = 'hello'
 
-      result = OxfordService.make_request("/entries/en/#{word}")
+      result = OxfordService.new.make_request("/entries/en/#{word}")
 
       expect(result).to be_a Hash
       expect(result[:success]).to be_truthy
