@@ -10,7 +10,9 @@ describe Play do
     end
     it 'disallows invalid words' do
       VCR.use_cassette('invaid_play_creation') do
-        play = create(:play, word: 'thisisnotavalidword')
+        user = create(:user)
+        game = create(:game, player_1: user)
+        play = Play.new(game: game, user: user, word: 'notavalidword')
         expect(play).to_not be_valid
       end
     end
@@ -19,8 +21,10 @@ describe Play do
   context "Instance methods" do
     context "#score_word" do
       it "scores the word" do
-        play = create(:play, word: "assess")
-        expect(play.score).to eq(6)
+        VCR.use_cassette('play_scoring') do
+          play = create(:play, word: "assess")
+          expect(play.score).to eq(6)
+        end
       end
     end
   end

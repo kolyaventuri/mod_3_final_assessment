@@ -31,9 +31,11 @@ context 'When I make a GET request to /api/v1/games/:id' do
   end
 
   scenario 'I am returned a serialized JSON response' do
-    get "/api/v1/games/#{game_id}"
+    VCR.use_cassette('game_get_endpoint') do
+      get "/api/v1/games/#{game_id}"
 
-    expect(response).to be_successful
-    expect(response.body).to eq(expected_json)
+      expect(response).to be_successful
+      expect(response.body).to eq(expected_json)
+    end
   end
 end
