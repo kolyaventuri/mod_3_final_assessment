@@ -9,10 +9,7 @@ class OxfordService
 
     return { success: false } if response.status != 200
 
-    data = JSON.parse(response.body, symbolize_names: true)
-    data[:success] = true
-    data[:root_form] = root_form(data)
-    data
+    parse_response(response.body)
   end
 
   def self.lookup_word(word)
@@ -32,6 +29,13 @@ class OxfordService
   def self.build_headers(conn)
     conn.headers['app_id'] = ENV['OXFORD_APP_ID']
     conn.headers['app_key'] = ENV['OXFORD_API_KEY']
+  end
+
+  def self.parse_response(body)
+    data = JSON.parse(body, symbolize_names: true)
+    data[:success] = true
+    data[:root_form] = root_form(data)
+    data
   end
 
   def self.root_form(data)
