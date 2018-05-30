@@ -25,6 +25,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+  gem 'launchy'
   gem 'pry'
   gem 'vcr'
   gem 'webmock'
