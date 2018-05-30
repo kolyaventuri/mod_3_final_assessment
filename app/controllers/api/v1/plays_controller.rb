@@ -4,6 +4,10 @@ class Api::V1::PlaysController < ApplicationController
     user = User.find(play_params[:user_id])
 
     result = game.plays.create(user: user, word: play_params[:word])
+
+    render json: { success: false }, status: 400 and return false unless result.valid?
+
+    render json: { success: true }, status: 201
   end
 
   private
