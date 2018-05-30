@@ -1,6 +1,22 @@
 require 'rails_helper'
 
 feature 'User posting to /api/v1/games/:id/plays', type: :request do
+  let(:expected_json) {
+    {
+      "game_id" => 1,
+      "scores" => [
+        {
+          "user_id" => 1,
+          "score" => 17
+        },
+        {
+          "user_id" => 2,
+          "score" => 16
+        }
+      ]
+    }.to_json
+  }
+
   before(:each) do
     josh = User.create(id: 1, name: "Josh")
     sal = User.create(id: 2, name: "Sal")
@@ -19,7 +35,13 @@ feature 'User posting to /api/v1/games/:id/plays', type: :request do
     expect(response.status).to be(201)
   end
 
-  xscenario 'should update the game score' do
+  scenario 'should update the game score' do
+    post "/api/v1/games/#{@game.id}/plays", params: { user_id: 1, word: 'at' }
+
+    get "/api/v1/games/#{@game.id}"
+
+    expect(response).to be_successful
+    expect(response.body).to eq(expected_json)
 
   end
 end
