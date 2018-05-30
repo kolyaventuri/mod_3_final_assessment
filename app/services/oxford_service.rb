@@ -11,7 +11,10 @@ class OxfordService
 
     return { success: false } if response.status != 200
 
-    JSON.parse(response.body, symbolize_names: true)
+    data = JSON.parse(response.body, symbolize_names: true)
+    data[:success] = true
+
+    data
   end
 
   private
