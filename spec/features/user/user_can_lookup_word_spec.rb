@@ -7,7 +7,7 @@ feature 'Any user visiting the root' do
         visit '/'
 
         fill_in 'word', with: 'foxes'
-        click_on 'Lookup Word'
+        click_on 'Validate Word'
 
         expect(current_path).to eq('/')
         expect(page).to have_content("'foxes' is a valid word and its root form is 'fox'.")
@@ -21,7 +21,7 @@ feature 'Any user visiting the root' do
         visit '/'
 
         fill_in 'word', with: 'foxez'
-        click_on 'Lookup Word'
+        click_on 'Validate Word'
 
         expect(current_path).to eq('/')
         expect(page).to have_content("'foxez' is not a valid word.")
