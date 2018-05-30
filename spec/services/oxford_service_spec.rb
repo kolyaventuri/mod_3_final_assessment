@@ -8,6 +8,7 @@ describe OxfordService, type: :service do
       result = OxfordService.make_request("/entries/en/#{word}")
 
       expect(result).to be_a Hash
+      binding.pry
       expect(result[:results].first[:id]).to eq(word)
     end
   end
