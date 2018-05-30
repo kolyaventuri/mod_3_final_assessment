@@ -15,12 +15,13 @@ describe OxfordService, type: :service do
 
   it 'should be able to look up a single word' do
     VCR.use_cassette('oxford_api_word') do
-      word = 'hello'
+      word = 'foxes'
 
       result = OxfordService.lookup_word(word)
 
       expect(result[:success]).to be_truthy
       expect(result[:results].first[:id]).to eq(word)
+      expect(result[:root_form]).to eq('fox')
     end
   end
 

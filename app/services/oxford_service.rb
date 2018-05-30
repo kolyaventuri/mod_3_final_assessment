@@ -13,6 +13,7 @@ class OxfordService
 
     data = JSON.parse(response.body, symbolize_names: true)
     data[:success] = true
+    data[:root_form] = data[:results].first[:lexicalEntries].first[:inflectionOf].first[:text] if data[:results].first[:lexicalEntries].first[:inflectionOf]
 
     data
   end
