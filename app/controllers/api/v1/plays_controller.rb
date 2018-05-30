@@ -1,4 +1,6 @@
 class Api::V1::PlaysController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def create
     game = Game.find(params[:game_id])
     user = User.find(play_params[:user_id])
