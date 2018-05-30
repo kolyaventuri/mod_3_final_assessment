@@ -2,6 +2,7 @@ class Api::V1::GamesController < ApplicationController
   def show
     game = Game.find(params[:id])
 
-    render json: GameSerializer.new(game).to_json
+    data = GameSerializer.new(game).serializable_hash[:data][:attributes]
+    render json: data.to_json
   end
 end
