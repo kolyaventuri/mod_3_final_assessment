@@ -20,6 +20,18 @@ describe OxfordService, type: :service do
       result = OxfordService.lookup_word(word)
 
       expect(result[:success]).to be_truthy
+      expect(result[:results].first[:id]).to eq(word)
+    end
+  end
+
+  it 'should return an error for a non-existent word' do
+    VCR.use_cassette('oxford_api_invalid_word') do
+      word = 'notarealword'
+
+      result = OxfordService.lookup_word(word)
+
+      expect(result[:success]).to be_falsey
+      expect(result[:results]).to be_nil
     end
   end
 end

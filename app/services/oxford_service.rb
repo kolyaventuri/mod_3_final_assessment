@@ -17,6 +17,10 @@ class OxfordService
     data
   end
 
+  def self.lookup_word(word)
+    make_request("/entries/en/#{word}")
+  end
+
   private
   def self.build_request(endpoint)
     url = "#{BASE_URL}#{endpoint}"
