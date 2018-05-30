@@ -18,7 +18,7 @@ class OxfordService
   end
 
   def self.lookup_word(word)
-    make_request("/entries/en/#{word}")
+    make_request("/inflections/en/#{word}")
   end
 
   private
