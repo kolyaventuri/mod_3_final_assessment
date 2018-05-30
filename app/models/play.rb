@@ -6,7 +6,7 @@ class Play < ApplicationRecord
 
   validates_each :word do |model, attr, value|
     result = OxfordService.lookup_word(value)
-    model.errors.add(attr, 'Word must be valid') unless result[:success]
+    model.errors.add(attr, 'must be valid') unless result[:success]
   end
 
   def letter_scores
