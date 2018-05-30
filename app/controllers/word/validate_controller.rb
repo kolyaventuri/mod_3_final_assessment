@@ -2,6 +2,7 @@ class Word::ValidateController < ApplicationController
   def create
     word_lookup_result = OxfordService.lookup_word(word_params[:word])
     if word_lookup_result[:success]
+      flash[:result] = "'#{word_params[:word]}' is a valid word and its root form is '#{word_lookup_result[:results].first[:lexicalEntries].first[:inflectionOf].first[:text]}'."
     else
       flash[:result] = "'#{word_params[:word]}' is not a valid word."
     end
