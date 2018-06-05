@@ -20,6 +20,10 @@ class Word
     end
   end
 
+  def self.valid?(word)
+    new(word).valid?
+  end
+
   private
 
   def check_validity
