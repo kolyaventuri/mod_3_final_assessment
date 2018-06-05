@@ -9,7 +9,7 @@ feature 'Any user visiting the root' do
         fill_in 'word', with: 'foxes'
         click_on 'Validate Word'
 
-        expect(current_path).to eq('/words')
+        expect(current_path).to eq('/word/validate')
         expect(page).to have_content("'foxes' is a valid word and its root form is 'fox'.")
       end
     end
@@ -23,7 +23,7 @@ feature 'Any user visiting the root' do
         fill_in 'word', with: 'foxez'
         click_on 'Validate Word'
 
-        expect(current_path).to eq('/words')
+        expect(current_path).to eq('/word/validate')
         expect(page).to have_content("'foxez' is not a valid word.")
       end
     end
