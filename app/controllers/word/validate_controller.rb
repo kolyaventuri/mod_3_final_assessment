@@ -8,7 +8,7 @@ class Word::ValidateController < ApplicationController
     #end
     #redirect_to root_path
 
-    @word = Word.new(word_params)
+    @word = Word.new(word_params[:word])
   end
 
   private

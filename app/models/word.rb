@@ -18,3 +18,4 @@ class Word
     @valid = result[:success]
   end
 end
+
