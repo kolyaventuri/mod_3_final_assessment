@@ -19,7 +19,7 @@ describe Word, type: :model do
 
   it 'should be able to say a word is not valid' do
     VCR.use_cassette('word_model_invalid') do
-      word = Word.new('foxz')
+      word = Word.new('foxez')
 
       expect(word).to_not be_valid
     end
