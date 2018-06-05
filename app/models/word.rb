@@ -24,7 +24,9 @@ class Word
 
   def check_validity
     result = OxfordService.lookup_word(@word)
+
     @valid = result[:success]
+
     if @valid
       @root_form = result[:root_form]
     end

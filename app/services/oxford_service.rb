@@ -4,8 +4,8 @@ class OxfordService
   BASE_URL = 'https://od-api.oxforddictionaries.com/api/v1'
 
   def make_request(endpoint)
-    request = build_request(endpoint)
-    response = request.get
+    request = build_request
+    response = request.get endpoint
 
     return { success: false } if response.status != 200
 
@@ -17,18 +17,17 @@ class OxfordService
   end
 
   private
-  def build_request(endpoint)
-    url = "#{BASE_URL}#{endpoint}"
-
-    conn = Faraday.new(url: url)
-    build_headers(conn)
-
-    conn
+  def build_request
+    Faraday.new(url: BASE_URL) do |req|
+      req.headers = build_headers
+    end
   end
 
-  def build_headers(conn)
-    conn.headers['app_id'] = ENV['OXFORD_APP_ID']
-    conn.headers['app_key'] = ENV['OXFORD_API_KEY']
+  def build_headers
+    {
+      'app_id' => ENV['OXFORD_API_ID'],
+      'app_key' => ENV['OXFORD_API_KEY']
+    }
   end
 
   def parse_response(body)
