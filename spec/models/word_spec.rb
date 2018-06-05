@@ -32,20 +32,4 @@ describe Word, type: :model do
       expect(word.root_form).to eq('fox')
     end
   end
-
-  it 'should generate a validity message' do
-    VCR.use_cassette('word_model_valid') do
-      word = Word.new('foxes')
-
-      expect(word.result).to eq("'foxes' is a valid word and its root form is 'fox'.")
-    end
-  end
-
-  it 'should generate an invalidity message' do
-    VCR.use_cassette('word_model_invalid') do
-      word = Word.new('foxez')
-
-      expect(word.result).to eq("'foxez' is not a valid word.")
-    end
-  end
 end
