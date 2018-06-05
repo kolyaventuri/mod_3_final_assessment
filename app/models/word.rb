@@ -12,14 +12,6 @@ class Word
     @valid
   end
 
-  def result
-    if valid?
-      "'#{word}' is a valid word and its root form is '#{root_form}'."
-    else
-      "'#{word}' is not a valid word."
-    end
-  end
-
   def self.valid?(word)
     new(word).valid?
   end
