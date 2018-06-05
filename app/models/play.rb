@@ -4,6 +4,10 @@ class Play < ApplicationRecord
 
   before_save :score_word
 
+  validates_each :word do |model, attr, value|
+    model.errors.add(attr, 'must be valid') unless Word.new(value).valid?
+  end
+
   def letter_scores
     {
       "A"=>1, "B"=>3, "C"=>3, "D"=>2, "E"=>1, "F"=>4, "G"=>2, "H"=>4, "I"=>1, "J"=>8,

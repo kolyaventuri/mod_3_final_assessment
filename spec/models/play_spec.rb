@@ -1,15 +1,16 @@
 require 'rails_helper'
 
-describe Play do
-  context "Instantiation" do
+describe Play, type: :model do
+  describe "Instantiation" do
     it 'allows valid words' do
       VCR.use_cassette('valid_play_creation') do
         play = create(:play, word: 'assess')
         expect(play).to be_valid
       end
     end
+
     it 'disallows invalid words' do
-      VCR.use_cassette('invaid_play_creation') do
+      VCR.use_cassette('invalid_play_creation') do
         user = create(:user)
         game = create(:game, player_1: user)
         play = Play.new(game: game, user: user, word: 'notavalidword')
