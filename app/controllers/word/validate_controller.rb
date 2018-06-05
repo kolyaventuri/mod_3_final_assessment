@@ -1,6 +1,8 @@
 class Word::ValidateController < ApplicationController
   def create
-    @word = Word.new(word_params[:word])
+    word = Word.new(word_params[:word])
+
+    @word = WordPresenter.new(word)
     render 'word/validate/create'
   end
 
